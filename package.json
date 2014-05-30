@@ -4,7 +4,7 @@
   "description": "File System Simulation",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --harmony-generators --reporter spec --require should --timeout 0 test/*-spec.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,12 @@
   },
   "homepage": "https://github.com/tjwudi/simufs",
   "dependencies": {
+
+  },
+  "devDependencies": {
     "co": "^3.0.6",
-    "thunkify": "^2.1.1"
+    "thunkify": "^2.1.1",
+    "mocha": "^1.20.0",
+    "should": "^4.0.0"
   }
 }

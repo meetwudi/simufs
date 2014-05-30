@@ -10,7 +10,7 @@ function indexOf(buffer, hex) {
 }
 
 function trim(buffer) {
-    return buffer.slice(0, indexOf(buffer, 0xff) + 1);
+    return buffer.slice(0, indexOf(buffer, 0x00));
 }
 
 module.exports = {
