@@ -4,7 +4,10 @@ var config = require('./conf'),
 
 function Block(id) {
   this.filepath = path.join(__dirname, 'local', id + '.bin');
-  this.sync();
+  this.binData = new Buffer(config.BLOCK_SIZE);
+  this.wipe();
+  // 这里所有的二进制数据都被填成0，IO模块需要
+  // 调用sync方法来更新所有的数据
 }
 
 /**
@@ -14,7 +17,6 @@ Block.prototype.sync = function(callback) {
   var stream = fs.createReadStream(this.filepath),
       that = this;
   callback = callback || function() {};
-  this.binData = new Buffer(0);
   stream.on('data', function(chunk) {
      that.binData = Buffer.concat([that.binData, chunk], config.BLOCK_SIZE); 
   });
@@ -29,6 +31,13 @@ Block.prototype.update = function(callback) {
   var stream = fs.createWriteStream(this.filepath);
   callback = callback || function() {};
   stream.write(this.binData, callback);
+};
+
+/**
+ * Wipe all data in this block
+ */
+Block.prototype.wipe = function() {
+  this.binData.fill(0);
 };
 
 
