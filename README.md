@@ -71,7 +71,7 @@ simufs采用了类似linux的多级目录结构。程序刚开始的时候，你
 ```
 
 #### 创建目录 mkdir(dirname)
-`mkdir(dirname)`创建一个新目录（在当前目录下）。
+`mkdir(dirname)`创建一个新目录（在当前目录下）。目录的命名约束和文件一致。
 
 ```
 > mkdir("etc")
@@ -82,7 +82,7 @@ simufs采用了类似linux的多级目录结构。程序刚开始的时候，你
 `rmdir(dirname)`删除当前目录下的一个目录，被删除的目录必须是空目录。
 
 ```
-> rmdir("ect")
+> rmdir("etc")
 - 目录etc删除完毕
 ```
 
