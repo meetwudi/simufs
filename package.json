@@ -1,0 +1,28 @@
+{
+  "name": "simufs",
+  "version": "0.0.0",
+  "description": "File System Simulation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/tjwudi/simufs"
+  },
+  "keywords": [
+    "filesystem",
+    "simulation",
+    "homework"
+  ],
+  "author": "John Wu <webmaster@leapoahead.com> (https://github.com/tjwudi)",
+  "license": "NONE",
+  "bugs": {
+    "url": "https://github.com/tjwudi/simufs/issues"
+  },
+  "homepage": "https://github.com/tjwudi/simufs",
+  "dependencies": {
+    "co": "^3.0.6",
+    "thunkify": "^2.1.1"
+  }
+}
