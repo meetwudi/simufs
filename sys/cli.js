@@ -8,6 +8,21 @@ function process(command) {
     case 'pwd':
       report(core.getCurrentPath());
       break;
+    case 'create':
+      core.createFile(command.args[0]);
+      break;
+    case 'ls':
+      report(core.listFiles());
+      break;
+    case 'exit':
+      core.exit();
+      break;
+    case 'read':
+      report(core.readFile(command.args[0]));
+      break;
+    case 'write':
+      core.writeFileByName(command.args[0], command.args[1]);
+      break;
     default:
       report('命令解析出错，请检查命令格式是否正确');
       break;

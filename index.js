@@ -9,6 +9,8 @@ function startPrompt() {
   process.stdout.write("> ");
   process.stdin.on('data', function(data) {
     cli((data.slice(0, data.length - 1)).toString());
-    process.stdout.write("> ");
+    process.nextTick(function() {
+      process.stdout.write("> ");
+    });
   });
 }

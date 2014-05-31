@@ -44,11 +44,12 @@ diskmgr.free = function(start, len) {
 /**
  * 寻找随机的连续的长度为len的块
  */
-diskmgr.queryFreeSpace = function(len) {
+diskmgr.queryFreeSpace = function(len, start) {
   var i, j,
     upperBound = diskmgr.freelist.length;
+  start = Math.max(256, start || 256);
   // 只能从非系统占用区寻找（256 ~ 7999）
-  for (i = 256; i < upperBound; ) {
+  for (i = start; i < upperBound; ) {
     j = i;
     while (j < upperBound && diskmgr.freelist[j + 1] === diskmgr.freelist[i]) {
       j ++;
@@ -79,8 +80,13 @@ diskmgr.chkFree = function(start, len) {
  * 根据FCB获取文件内容
  */
 diskmgr.readFile = function(fcb) {
-  return JSON.parse(io.readtrim(fcb.blk, fcb.len).toString());
+  return io.readtrim(fcb.blk, fcb.len).toString();
 };
+
+/**
+ * 写文件（io.write别名）
+ */
+diskmgr.write = io.write;
 
 /**
  * 同步所有文件
