@@ -2,7 +2,10 @@ var config = require('./conf'),
     Block = require('./Block'),
     blocks = [],
     io = {},
-    cli = require('../util/cli');
+    cli = require('../util/cli'),
+    bufferHelper = require('../util/buffer-helper');
+
+io.online = false;
 
 /**
  * 初始化所有的block，并且让它们从磁盘同步内容
@@ -11,6 +14,9 @@ io.init = function(callback) {
     var i, 
         block, 
         cnt = 0;
+    if (io.online) {
+        return callback();
+    }
     cli.report('正在初始化物理块');
     for (i = 0; i < config.BLOCK_CNT; i ++) {
         block = new Block(i);
@@ -19,10 +25,20 @@ io.init = function(callback) {
             cnt ++;
             if (cnt === config.BLOCK_CNT - 1) {
                 cli.report('初始化物理块完成');
+                io.online = true;
                 callback();
             }
         });
     }
+};
+
+
+/**
+ * 从第startBlock块读数据，连续读length个块，并去除碎片信息
+ */
+io.readtrim = function(startBlock, length) {
+    var buf = io.read(startBlock, length);
+    return bufferHelper.trim(buf);
 };
 
 /**
@@ -70,6 +86,8 @@ io.update = function (callback) {
         });
     })(0);
 };
+
+
 
 module.exports = io;
 
