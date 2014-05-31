@@ -1,6 +1,5 @@
 function report(message) {
-  message.replace(/\n/g, '\n ');
-  console.log('- ' + message);
+  console.log('- ' + message.replace(/\n/g, '\n  '));
 }
 
 module.exports = {

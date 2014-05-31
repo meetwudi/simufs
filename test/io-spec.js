@@ -14,7 +14,25 @@ describe('IO', function() {
 
   it('should be able to read multiple blocks\' data', function(done) {
     var buf = io.read(1, 2);
-    console.log(bufferHelper.trim(buf).toString());
+    bufferHelper.trim(buf).toString();
+    done();
+  });
+
+  it('should be able to write data to multiple blocks', function(done) {
+    var text = 'Hello, I am John Wu';
+    io.write(4, 2, text);
+    var str = bufferHelper.trim(io.read(4, 2)).toString();
+    str.should.be.eql(text); 
+    done();
+  });
+
+  it('should be able to write and read a JSON object', function(done) {
+    var obj = { key: 'value' };
+    io.write(100, 200, JSON.stringify(obj));
+    var objstr = bufferHelper.trim(io.read(100, 200)).toString();
+    var parsed = JSON.parse(objstr);
+    parsed.should.have.keys(['key']);
+    parsed['key'].should.eql('value');
     done();
   });
 });

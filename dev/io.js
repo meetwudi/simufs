@@ -26,7 +26,7 @@ io.init = function(callback) {
 };
 
 /**
- * 从第startBlock块读数据，连续读length个块，返回字符串
+ * 从第startBlock块读数据，连续读length个块
  */
 io.read = function (startBlock, length) {
     var result = new Buffer(0),
@@ -34,7 +34,7 @@ io.read = function (startBlock, length) {
     for (i = startBlock; i < startBlock + length; i ++) {
         result = Buffer.concat([result, blocks[i].binData]);
     }
-    return result.toString();
+    return result;
 };
 
 /**
@@ -56,6 +56,7 @@ io.write = function (startBlock, length, data) {
  * 将所有数据写回硬盘
  */
 io.update = function (callback) {
+    callback = callback || function() {};
     cli.report('保存系统数据中');
     (function doUpdate(i) {    
         blocks[i].update(function() {

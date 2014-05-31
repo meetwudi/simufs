@@ -13,6 +13,10 @@ function trim(buffer) {
     return buffer.slice(0, indexOf(buffer, 0x00));
 }
 
+function blockNum(buffer, blockSize) {
+    return Math.ceil(buffer.length / blockSize);
+}
+
 module.exports = {
     indexOf: indexOf,
     trim: trim
