@@ -18,6 +18,13 @@ diskmgr.init = function(callback) {
   });
 };
 
+/**
+ * 保存FreeList到磁盘
+ */
+diskmgr.syncFreeList = function() {
+  io.write(0, 4, JSON.stringify(diskmgr.freelist));
+};
+
 
 /**
  * 申请len个块，从start开始申请
@@ -28,6 +35,7 @@ diskmgr.alloc = function(start, len) {
   for (i = start; i < Math.min(start + len, upperBound); i ++) {
     diskmgr.freelist[i] = 1;
   }
+  diskmgr.syncFreeList();
 };
 
 /**
@@ -39,6 +47,7 @@ diskmgr.free = function(start, len) {
   for (i = start; i < Math.min(start + len, upperBound); i ++) {
     diskmgr.freelist[i] = 0;
   }
+  diskmgr.syncFreeList();
 };
 
 /**

@@ -50,7 +50,7 @@ simufs采用了类似linux的多级目录结构。程序刚开始的时候，你
 - 创建文件myfile.ext成功
 ```
 
-#### 删除文件 unlink(filename)
+#### TODO: 删除文件 unlink(filename)
 `unlink(filename)`删除当前文件夹下的一个文件。当文件不存在时，会予以报错。
 
 ```
@@ -60,7 +60,7 @@ simufs采用了类似linux的多级目录结构。程序刚开始的时候，你
 - 文件test.ext不存在
 ```
 
-#### 查看文件信息  info(filename)
+#### TODO: 查看文件信息  info(filename)
 `info(filename)`查看当前文件夹下文件名为`filename`的文件的FCB部分信息。这些信息包括
 
 - 创建时间
@@ -76,7 +76,7 @@ simufs采用了类似linux的多级目录结构。程序刚开始的时候，你
   文件类型：普通文件
 ```
 
-#### 创建目录 mkdir(dirname)
+#### TODO: 创建目录 mkdir(dirname)
 `mkdir(dirname)`创建一个新目录（在当前目录下）。目录的命名约束和文件一致。空间不足将报错（至少要有一个空闲块）
 
 ```
@@ -84,7 +84,7 @@ simufs采用了类似linux的多级目录结构。程序刚开始的时候，你
 - 目录etc创建完毕
 ```
 
-#### 删除目录 rmdir(dirname)
+#### TODO: 删除目录 rmdir(dirname)
 `rmdir(dirname)`删除当前目录下的一个目录，被删除的目录必须是空目录。
 
 ```
@@ -104,7 +104,7 @@ simufs采用了类似linux的多级目录结构。程序刚开始的时候，你
 ```
 
 
-#### 读文件内容  read(filename)
+#### TODO: 读文件内容  read(filename)
 `read(filename)`读取当前文件夹下文件名为`filename`的文件的内容。文件内容只能为字符串。
 
 ```
@@ -112,7 +112,7 @@ simufs采用了类似linux的多级目录结构。程序刚开始的时候，你
 - Hello, world!
 ```
 
-#### 写文件内容 write(filename, content)
+#### TODO: 写文件内容 write(filename, content)
 将字符串content写入文件`filename`。空间不足将报错。
 
 ```
@@ -120,7 +120,7 @@ simufs采用了类似linux的多级目录结构。程序刚开始的时候，你
 - 文件myfile.ext保存完毕
 ```
 
-#### 进入目录 cd(path)
+#### TODO: 进入目录 cd(path)
 
 #### 退出 exit()
 必须使用exit退出系统，否则数据将无法保存。

@@ -38,15 +38,20 @@ core.writeFile = core.updateFile;
  * 创建文件
  */
 core.createFile = function(filename) {
-  var fcbBlock = diskmgr.queryFreeSpace(1),
-    fileBlock = diskmgr.queryFreeSpace(5, fcbBlock + 1); // 文件5个块
-  if (fcbBlock && fileBlock) {
-    var fileFcb = new FCB('f', filename, fileBlock, 5, fcbBlock);
+  var fcbBlockStart = diskmgr.queryFreeSpace(1),
+    fileBlockStart = diskmgr.queryFreeSpace(5, fcbBlockStart + 1); // 文件5个块
+  if (fcbBlockStart && fileBlockStart) {
+    var fileFcb = new FCB('f', filename, fileBlockStart, 5, fcbBlockStart);
+    // 申请空间
+    diskmgr.alloc(fcbBlockStart, 1);
+    diskmgr.alloc(fileBlockStart, 5);
     // 当前文件夹下面加入这个文件
     currentDir.d.push(fileFcb);
     // 写回磁盘
     core.updateFile(currentDirFcb, JSON.stringify(currentDir));
-    // 写文件
+    // 写文件FCB
+    io.write(fcbBlockStart, 1, JSON.stringify(fileFcb));
+    // 写文件内容
     core.writeFile(fileFcb, "");
   }
   else {
@@ -102,7 +107,6 @@ core.writeFileByName = function(filename, content) {
  */
 core.exit = function() {
   diskmgr.update(function() {
-    var t = 1;
     process.exit();
   });
 };
