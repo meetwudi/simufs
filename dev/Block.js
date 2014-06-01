@@ -39,12 +39,7 @@ Block.prototype.sync = function(callback) {
  * 将binData中的数据写回真实磁盘。
  */
 Block.prototype.update = function(callback) {
-  var stream = fs.createWriteStream(this.filepath);
-  callback = callback || function() {};
-  stream.write(this.binData, function() {
-    stream.close();
-    callback();
-  });
+  fs.writeFile(this.filepath, this.binData.toString(), callback);
 };
 
 /**

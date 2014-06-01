@@ -23,6 +23,21 @@ function process(command) {
     case 'write':
       core.writeFileByName(command.args[0], command.args[1]);
       break;
+    case 'unlink':
+      core.unlinkFile(command.args[0]);
+      break;
+    case 'mkdir':
+      core.createDir(command.args[0]);
+      break;
+    case 'cd':
+      core.enterDir(command.args[0]);
+      break;
+    case 'goback':
+      core.leaveDir();
+      break;
+    case 'info':
+      report(core.getFileInfo(command.args[0]));
+      break;
     default:
       report('命令解析出错，请检查命令格式是否正确');
       break;

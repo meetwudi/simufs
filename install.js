@@ -40,7 +40,7 @@ io.init(function() {
   // 块，初始长度为一个块。
   cli.report('初始化根目录');
   var rootdir = {t: 'd', id: 'root', blk: 256,
-    len: 1, crd: Date.now(), upd: Date.now()  };
+    len: 1, crd: Date.now()};
   io.write(4, 1, JSON.stringify(rootdir));
   io.write(256, 1, JSON.stringify({cpath:'/',fb:null,d:[]}));
 

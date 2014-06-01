@@ -1,5 +1,5 @@
 function report(message) {
-  console.log('- ' + message.replace(/\n/g, '\n  '));
+  process.stdout.write('- ' + message.replace(/\n/g, '\n  ') + '\n');
 }
 
 function _trim(str) {
