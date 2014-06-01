@@ -83,7 +83,7 @@ simufs采用了类似linux的多级目录结构。程序刚开始的时候，你
 - 目录etc创建完毕
 ```
 
-#### TODO: 删除目录 rmdir(dirname)
+#### 删除目录 rmdir(dirname)
 `rmdir(dirname)`删除当前目录下的一个目录，被删除的目录必须是空目录。
 
 ```
